@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MetaPhoto App</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" id="titleFilter" placeholder="Filter by title" />
+      <input
+        type="text"
+        id="albumTitleFilter"
+        placeholder="Filter by album title"
+      />
+      <input
+        type="text"
+        id="userEmailFilter"
+        placeholder="Filter by user email"
+      />
+      <button onclick="fetchData()">Fetch Data</button>
+      <div id="results"></div>
+    </div>
+    <h3>Generate Catchphrases</h3>
+    <select id="companyId">
+      <option value="1">Romaguera-Crona</option>
+    </select>
+    <button onclick="generateCatchphrase()">Generate Catchphrases</button>
+    <div id="catchphrases"></div>
+    <script src="main.js"></script>
+  </body>
+</html>
