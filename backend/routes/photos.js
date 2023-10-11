@@ -1,9 +1,9 @@
 const express = require("express");
 const axios = require("axios");
 const router = express.Router();
-const OpenAIApi = require("openai");
+const OpenAI = require("openai");
 
-const openai = new OpenAIApi({ key: 'OPENAI_API_KEY' });
+const openai = new OpenAI({apiKey: 'OPENAI_KEY'});
 
 const fetchData = async (url) => {
   const response = await axios.get(url);
@@ -81,14 +81,17 @@ router.get("/generate-catchphrase/:companyId", async (req, res) => {
     }
 
     const prompt = `Generate five alternative catchphrases that convey a similar concept or sentiment to: "${user.company.catchPhrase}"`;
-    const response = await openai.complete({
-      prompt: prompt,
-      max_tokens: 150,
+  
+    const response = await openai.completions.create({
+      model: "gpt-3.5-turbo-instruct",
+      prompt,
+      max_tokens: 7,
+      temperature: 0,
     });
 
     res.status(200).json({
       original: user.company.catchPhrase,
-      alternatives: response.choices[0].text.trim().split("\n"),
+      alternatives: response.data?.choices[0].text.trim()
     });
   } catch (error) {
     res.status(500).json({})
